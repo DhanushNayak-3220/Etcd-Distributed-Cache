@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true">
+    <property name="INFO" value="./logs"/>
+    <property name="ERROR" value="./logs"/>
+
+
+    <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>%(%d{ISO8601}) %(%-5level) [%(%t)] %(%C{1}): %msg%n%throwable</Pattern>
+        </layout>
+    </appender>
+
+    <!--Service Config Begins Here-->
+
+    <appender name="EtcdServiceErrorLogger"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/services/EtcdService/Error/EtcdServiceError.log</file>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">-->
+            <level>ERROR</level>
+        </filter>
+        <rollingPolicy
+                class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>logs/services/EtcdService/Error/EtcdServiceError.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <MaxFileSize>10MB</MaxFileSize>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>%d %-4relative [%thread] %-5level %logger{35} - %msg%n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <appender name="EtcdServiceDebugLogger"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/services/EtcdService/Debug/EtcdServiceDebug.log</file>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+        <rollingPolicy
+                class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>logs/services/EtcdService/Debug/EtcdServiceDebug.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <MaxFileSize>10MB</MaxFileSize>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>%d %-4relative [%thread] %-5level %logger{35} - %msg%n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <logger name="com.nayak.cache.cache.EtcdService">
+        <appender-ref ref="EtcdServiceDebugLogger"/>
+    </logger>
+    <logger name="com.nayak.cache.cache.EtcdService">
+        <appender-ref ref="EtcdServiceErrorLogger"/>
+    </logger>
+
+    <root level="info">
+        <appender-ref ref="Console"/>
+    </root>
+</configuration>

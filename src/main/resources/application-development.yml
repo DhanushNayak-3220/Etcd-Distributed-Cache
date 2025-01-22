@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/Cache_Database?createDatabaseIfNotExist=true
+    username: admin01
+    password: H1f78tnajhg&*
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+
+etcd:
+  endpoints: http://localhost:2379

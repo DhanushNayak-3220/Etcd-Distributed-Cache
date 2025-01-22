@@ -1,0 +1,33 @@
+server:
+  port: 50001
+  error:
+    whitelabel:
+      enabled: false
+    path: /error
+
+spring:
+  datasource:
+    hikari:
+      auto-commit: true
+      minimum-idle: 1
+      maximum-pool-size: 10
+      idle-timeout: 600000
+      pool-name: SpringBootJPAHikariCP
+      max-lifetime: 1800000
+      connection-timeout: 30000
+      isolation-level: TRANSACTION_READ_COMMITTED
+  jackson:
+    default-property-inclusion: non_null
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: com.nayak.cache.config.MySQLCustomDialect
+        jdbc:
+          batch_size: 250
+        order_inserts: true
+        order_updates: true
