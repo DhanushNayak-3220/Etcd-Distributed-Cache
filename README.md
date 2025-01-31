@@ -1,24 +1,42 @@
-# Sample Project For ETCD As Distributed key-value store.
+# **ETCD as a Distributed Key-Value Store**
 
-A brief description of what your project does.
+## **Overview**  
+This project demonstrates how to use **ETCD** as a distributed key-value store in a **Spring Boot** application. ETCD ensures strong consistency, making it ideal for service discovery, configuration management, and distributed locking.
 
-## Prerequisites
-- Java 17
-- Spring Boot 3.0.x
-- Maven or Gradle
-- Any other necessary tools or frameworks
+---
 
-## Running the Docker Container
+## **Prerequisites**  
+Ensure you have the following installed before proceeding:  
+✅ **Java 17**  
+✅ **Spring Boot 3.0.x**  
+✅ **Maven** or **Gradle**  
+✅ **Docker** (for running the ETCD server)  
 
-To deploy the application with Docker, you can run the following command to start the required etcd server container: 
-- docker run -d --name etcd-server -p 2379:2379 -p 2380:2380 -e ALLOW_NONE_AUTHENTICATION=yes -e ETCD_ADVERTISE_CLIENT_URLS=http://0.0.0.0:2379 bitnami/etcd:latest
+---
 
-## License
+## **Running the ETCD Server with Docker**  
 
-- ETCD is licensed under the MIT License.
+To quickly set up an ETCD server, run the following command:  
 
-## Important Reminders
+```sh
+docker run -d --name etcd-server \
+  -p 2379:2379 -p 2380:2380 \
+  -e ALLOW_NONE_AUTHENTICATION=yes \
+  -e ETCD_ADVERTISE_CLIENT_URLS=http://0.0.0.0:2379 \
+  bitnami/etcd:latest
+```
 
-Remember to empty your cache whenever you perform an ADD, DELETE, or UPDATE operation to avoid returning stall data from the cache. This will be evident when you observe caching 
+This will start an ETCD server container that listens on **port 2379** for client requests.
 
-## For More Info go here https://etcd.io/
+---
+
+## **⚡ Important Caching Reminder**  
+When performing **ADD, DELETE, or UPDATE** operations, always **clear your cache** to prevent stale data from being returned. Cached values may not reflect the latest changes immediately, leading to inconsistencies.
+
+---
+
+## **🔗 Resources**  
+🔹 **Official ETCD Docs**: [etcd.io](https://etcd.io/)  
+🔹 **Spring Boot + ETCD Guide** *(Coming Soon!)*  
+
+🚀 **Get started now and build scalable distributed applications with ETCD!**
